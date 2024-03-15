@@ -1,30 +1,35 @@
+import random
 from PIL import Image, ImageDraw, ImageFont
 
+orig_pic="icon.jpg"
+new_pic="icon-new.jpg"
+
+print(f"new pic: {new_pic} ")
 # 打开图像文件
-image = Image.open("input_image.jpg")
+original_image = Image.open(orig_pic)
 
-# 在图像上创建一个Draw对象
-draw = ImageDraw.Draw(image)
-
-# 设置字体
-font = ImageFont.truetype("arial.ttf", 30)
+copied_image = original_image.copy()
+draw = ImageDraw.Draw(copied_image)
+# 还是自备一个字体文件保险点
+font = ImageFont.truetype("./Carre-JWja.ttf", copied_image.height * 0.1)
 
 # 要添加的数字
-number = 1
+number = random.randint(1, 99)
 
 # 获取数字的宽度和高度
-text_width, text_height = draw.textsize(str(number), font=font)
+
+text_width = font.getlength(str(number))
 
 # 计算数字的位置（右上角）
-x = image.width - text_width - 10
-y = 10
+x = copied_image.width - text_width - copied_image.width*0.05
+y = copied_image.height * 0.05
 
 # 在图像上叠加数字
-draw.text((x, y), str(number), fill=(255, 255, 255), font=font)
+draw.text((x, y), str(number), fill=(230, 0, 0), font=font)
 
 # 保存修改后的图像
-image.save("output_image.jpg")
+copied_image.save(new_pic)
 
 # 显示图像
-image.show()
+copied_image.show()
 
