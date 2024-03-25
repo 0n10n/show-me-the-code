@@ -1,24 +1,30 @@
 
 #需要的优惠码数量
-COUNT=20
+COUNT=200
+#需要两个单词拼接在一起
+NUM=2
 WORD_LIST='top_english_words_lower_10000.txt'
-TOTAL_LENGTH=10
 
 def get_random_word():
     pass
-def get_valid():
-    v_words={}
+
+#只要长度为4-6的单词，忽略其他的
+def get_valid_words():
     with open(WORD_LIST, 'r', encoding='utf-8') as file:
         for line in file:
             word=line.strip()
             if word and not word.startswith('#'):
                 length=len(word)
-                if v_words[length].
-                v_words[length].
-                
-    pass
+                if 3<length<7:
+                    all_words.add(word)
 
-valid_words=get_valid()
+#用了集合来做，反正是随机的
+all_words=set()
+get_valid_words()
+
 
 for i in range(COUNT):
-    print(i)
+    coupon = ""
+    for x in range(NUM):
+        coupon+=all_words.pop()
+    print(f'{i+1} - {coupon.upper()}')  
