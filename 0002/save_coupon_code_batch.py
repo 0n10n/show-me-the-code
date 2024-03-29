@@ -1,10 +1,11 @@
-from mysql.connector import MySQLConnection, Error
+import mysql.connector
 
-#需要的优惠码数量
+# 这个版本和gen_save_coupon_code.py的差异是，这个是用cursor.executemany()一次性把优惠码写入数据库的
+# 定义需要的优惠码数量
 COUNT=200
-#需要两个单词拼接在一起
+# 需要把两个单词拼接在一起，每个单词4-6个字符长
 NUM=2
-WORD_LIST='top_english_words_lower_10000.txt'
+WORD_LIST='../res/top_english_words_lower_10000.txt'
 
 
 def remove_special_characters(text):
@@ -32,7 +33,8 @@ def get_all_codes(words_len46):
         for x in range(NUM):
             coupon+=words_len46.pop()
         #print(f'{i+1} - {coupon.upper()}') 
-        all_codes.append(coupon.upper())    
+        #下面这句注意要添加逗号，才是添加了一个元组，每个元组只有一个元素。如果漏了逗号，后面的cursor.executemany会出错。
+        all_codes.append((coupon.upper(),))
     return all_codes
 
 def insert_codes(all_words):
@@ -42,18 +44,16 @@ def insert_codes(all_words):
         password="12345678",
         database="coupons"
     )
-
+    conn.connect()
 
     sql = "INSERT INTO codes (code_name) VALUES (%s)"
     try:
         cursor = conn.cursor()
         cursor.executemany(sql, all_words)
-        #cursor.execute(sql, val)
-
         conn.commit()
         cursor.close()
         conn.close()
-    except Error as error:
+    except mysql.connector.Error as error:
         print(error)    
 
 def write_to_file(array, filename):
@@ -67,4 +67,5 @@ all_codes=[]
 words_len46 = get_valid_words()
 #write_to_file(words_len46, './words_list.txt')
 all_codes=get_all_codes(words_len46)
+# 把返回的全部优惠码，一次性写入数据库：
 insert_codes(all_codes)

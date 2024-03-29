@@ -3,7 +3,7 @@
 COUNT=200
 #需要两个单词拼接在一起
 NUM=2
-WORD_LIST='top_english_words_lower_10000.txt'
+WORD_LIST='../res/top_english_words_lower_10000.txt'
 
 def get_random_word():
     pass

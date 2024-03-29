@@ -1,10 +1,11 @@
 import mysql.connector
 
+# 这个版本和gen_coupon_code.py的差异是，这个是单行写入数据库的
 #需要的优惠码数量
 COUNT=200
 #需要两个单词拼接在一起
 NUM=2
-WORD_LIST='top_english_words_lower_10000.txt'
+WORD_LIST='../res/top_english_words_lower_10000.txt'
 
 def remove_special_characters(text):
     special_characters = ['.', '_']
