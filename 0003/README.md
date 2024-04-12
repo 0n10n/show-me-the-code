@@ -9,3 +9,4 @@ docker-compose -f docker-compose-redis.yml up -d
 redis-cli -h 127.0.0.1 -p 6379 -a password
 
 参考：https://redis.io/docs/connect/clients/python/
+
