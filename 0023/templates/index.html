@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言簿</title>
+</head>
+<body>
+    <h1>留言簿</h1>
+    
+    <!-- 显示留言列表 -->
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    
+    <!-- 表单用于添加留言 -->
+    <form action="/add_message" method="post">
+        <input type="text" name="message" placeholder="请输入留言内容" required>
+        <button type="submit">提交留言</button>
+    </form>
+</body>
+</html>

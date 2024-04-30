@@ -11,7 +11,7 @@ original_image = Image.open(orig_pic)
 copied_image = original_image.copy()
 draw = ImageDraw.Draw(copied_image)
 # 还是自备一个字体文件保险点
-font = ImageFont.truetype("./Carre-JWja.ttf", copied_image.height * 0.1)
+font = ImageFont.truetype("../res/Carre-JWja.ttf", copied_image.height * 0.1)
 
 # 要添加的数字
 number = random.randint(1, 99)
